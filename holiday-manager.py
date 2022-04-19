@@ -55,7 +55,7 @@ class HolidayList:
 
     def getResponse(self):
         while 1:
-            responseInput = input("yes or no")
+            responseInput = input("yes or no: ")
             if responseInput == 'yes' or responseInput == 'no':
                 return responseInput
             else:
@@ -67,7 +67,11 @@ class HolidayList:
         if type(holidayObj) == Holiday:
             self.innerHolidays.append(holidayObj)
             print(f'{holidayObj}')
-            print("new entry")
+            print("""
+            =================
+            new holiday entry
+            =================
+            """)
             self.notSaved = True
         else:
             print("Not a valid input, please try again.") 
@@ -91,7 +95,11 @@ class HolidayList:
         for x in self.innerHolidays:
             if vars(x) == vars(selectedHoliday):
                 self.innerHolidays.remove(x)
-                print("Holiday removed")
+                print("""
+                ===============
+                Holiday removed
+                ===============
+                """)
                 deleteHoliday = True
                 self.notSaved = True
         
@@ -121,7 +129,11 @@ class HolidayList:
             holdList.append({'name': nameDate[0], 'date': str(nameDate[1])})
         json.dump(dictList_2, file, indent = 2)
         file.close()
-        print("Added to new file")
+        print("""
+        =================
+        Added to new file
+        =================
+        """)
         self.notSaved = False
         # Write out json file to selected file.
 
@@ -136,12 +148,14 @@ class HolidayList:
     def getDateInput(self):
         while 1:
             userInput = input("Enter a date 'YYYY-MM-DD': ")
-        try:
-            inputList = [int(x) for x in list(userInput.split("-"))]
-            myDate = dt.date(inputList[0], inputList[1], inputList[2])
-            return myDate
-        except:
-            print("Invalid input, please try again")
+            try:
+                inputList = [int(x) for x in list(userInput.split("-"))]
+                myDate = dt.date(inputList[0], inputList[1], inputList[2])
+                print('======================')
+                return myDate
+
+            except:
+                print("Invalid input, please try again")
     
     def getWeekInput(self):     #get week input in range 1-53, return integer (0 for current week)
         while 1:
@@ -273,7 +287,7 @@ Holiday Menu
         # 1: add a holiday; sort by numbers, makes it easier.
         while 1:
             try:
-                userInput = int(input("Please select an option, 1 - 5 "))
+                userInput = int(input("Please select an option, 1 - 5: "))
                 if userInput in range(1,6):
                     return userInput
                 else:
